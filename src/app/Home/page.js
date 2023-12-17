@@ -4,12 +4,15 @@ import React, { useState, useEffect } from 'react'
 import { App, Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from 'antd';
 const { Option } = Select;
 import { db, storage, setDoc, collection, doc, onAuthStateChanged, auth, getStorage, ref, uploadBytes, getDocs } from '../firebase/config';
+import ButtonGroup from 'antd/es/button/button-group';
+import Link from 'next/link';
 
 // import React, { useState } from 'react';
 // import { PlusOutlined } from '@ant-design/icons';
 // import { Modal, Upload } from 'antd';
 
 const Home = () => {
+ 
 
   const [data, setData] = useState([]);
 
@@ -58,7 +61,7 @@ const Home = () => {
 
 
     const storageRef = ref(storage, "user");
-    const file = fileInput.files[0];
+    
     // 'file' comes from the Blob or File API
     uploadBytes(storageRef, file).then((snapshot) => {
       console.log('Uploaded a blob or file!');
@@ -123,6 +126,7 @@ const Home = () => {
         }
       >
         <Form layout="vertical" >
+          <Input type='file' id=" file" width={100} className='border border-green-400 hoover:border-green-400'/>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
@@ -291,7 +295,7 @@ const Home = () => {
             <ul className="space-y-2 font-medium">
               <li>
                 <a className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <span style={{ textAlign: "center", width: "100%", fontWeight: "bold", fontSize: "18px" }}>Dashboard</span>
+                  <span style={{ textAlign: "center", width: "100%", fontWeight: "bold", fontSize: "18px" }}>Attendance</span>
                 </a>
               </li>
               <li>
@@ -303,11 +307,13 @@ const Home = () => {
               <li>
                 <a href="#" className="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                   <img className="rounded-full bg-green-400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Avatar_icon_green.svg/1200px-Avatar_icon_green.svg.png" width={25} color='green' />
-                  <span className="flex-1 ms-3 whitespace-nowrap">Attendance</span>
+                <Link href={'./Attendance'} className="flex-1 ms-3 whitespace-nowrap">Attendance</Link>
                 </a>
               </li>
             </ul>
+            {/* <div><button className='border-2 w-20 h-20 mt-60 mr-10 bg-green-200'>Logout</button></div> */}
           </div>
+         
         </aside>
         <div className="p-10 w-full">
           <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden w-full">
